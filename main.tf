@@ -1,7 +1,6 @@
-#
-#
-# Main Terraform file for the project
-#
+
+#### Azure Logs Analytics deployment #####
+
 
 resource "azurerm_resource_group" "rg" {
   name                        = var.rg_name
