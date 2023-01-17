@@ -1,7 +1,6 @@
-#
-#
-# Main Terraform file for the project
-#
+
+#### Azure Logs Analytics deployment #####
+
 
 resource "azurerm_resource_group" "rg" {
   name                        = var.rg_name
@@ -20,4 +19,5 @@ resource "azurerm_log_analytics_workspace" "law" {
   resource_group_name = var.rg_name
   sku                 = "PerGB2018"
   retention_in_days   = 30
+  depends_on          = [azurerm_resource_group.rg]
 }
