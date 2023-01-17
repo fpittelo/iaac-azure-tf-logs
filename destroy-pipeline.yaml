@@ -6,9 +6,9 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  rg_group: 'iaac-azure-tf-scaleset'
+  rg_group: 'iaac-azure-tf-logs'
   sa_name: 'iaaclabs'
-  cont_name: 'iaacazuretfscaleset'
+  cont_name: 'iaacazuretflogs'
   storage_key: 'terraform.tfstate'
 
 stages:
@@ -28,7 +28,7 @@ stages:
               backendServiceArm: 'terraform'
               backendAzureRmResourceGroupName: 'FRED'
               backendAzureRmStorageAccountName: 'iaaclabs'
-              backendAzureRmContainerName: 'iaacazuretfscaleset'
+              backendAzureRmContainerName: 'iaacazuretflogs'
               backendAzureRmKey: 'terraform.tfstate'
           - task: TerraformTaskV3@3
             displayName: plan
