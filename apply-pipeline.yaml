@@ -15,7 +15,7 @@ variables:
 stages:
   - stage: validate
     jobs:
-      - job: job validate
+      - job: validate
         continueOnError: false
         steps:
         - task: TerraformInstaller@0
