@@ -12,7 +12,7 @@ variables:
   storage_key: 'terraform.tfstate'
 
 stages:
-  - stage: stage destroy
+  - stage: destroy
     jobs:
       - job: destroy
         steps:

@@ -13,7 +13,7 @@ variables:
   storage_key: 'terraform.tfstate'
 
 stages:
-  - stage: stage validate
+  - stage: validate
     jobs:
       - job: job validate
         continueOnError: false
@@ -37,7 +37,7 @@ stages:
           inputs:
             provider: 'azurerm'
             command: 'validate'
-  - stage: stage deploy
+  - stage: deploy
     condition: succeeded('tfvalidate')
     dependsOn: validate
     jobs:
