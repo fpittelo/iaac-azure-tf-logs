@@ -1,4 +1,4 @@
-#
+
 #All variables used on this project
 
 #### variable for subscription_id ####
