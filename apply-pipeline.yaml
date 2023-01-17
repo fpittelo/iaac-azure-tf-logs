@@ -1,4 +1,4 @@
-##### Apply Pipeline #######
+##### Apply Pipeline ######
 
 trigger:
   - feature
@@ -13,9 +13,9 @@ variables:
   storage_key: 'terraform.tfstate'
 
 stages:
-  - stage: stage validate
+  - stage: validate
     jobs:
-      - job: job validate
+      - job: validate
         continueOnError: false
         steps:
         - task: TerraformInstaller@0
@@ -27,7 +27,7 @@ stages:
           inputs:
             provider: 'azurerm'
             command: 'init'
-            backendServiceArm: 'Pay-As-You-Go(a6f24a81-7804-44a9-b074-25a9781afd24)'
+            backendServiceArm: 'terraform'
             backendAzureRmResourceGroupName: 'FRED'
             backendAzureRmStorageAccountName: 'iaaclabs'
             backendAzureRmContainerName: 'iaacazuretflogs'
@@ -37,14 +37,14 @@ stages:
           inputs:
             provider: 'azurerm'
             command: 'validate'
-  - stage: stage deploy
-    condition: succeeded('tfvalidate')
+  - stage: deploy
+    condition: succeeded('validate')
     dependsOn: validate
     jobs:
       - job: apply
         steps:
           - task: TerraformInstaller@0
-            displayName: deptfinstall
+            displayName: install
             inputs:
               terraformVersion: 'latest'
           - task: TerraformTaskV3@3
@@ -52,7 +52,7 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'init'
-              backendServiceArm: 'Pay-As-You-Go(a6f24a81-7804-44a9-b074-25a9781afd24)'
+              backendServiceArm: 'terraform'
               backendAzureRmResourceGroupName: 'FRED'
               backendAzureRmStorageAccountName: 'iaaclabs'
               backendAzureRmContainerName: 'iaacazuretflogs'
@@ -62,10 +62,10 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'plan'
-              environmentServiceNameAzureRM: 'Pay-As-You-Go(a6f24a81-7804-44a9-b074-25a9781afd24)'
+              environmentServiceNameAzureRM: 'terraform'
           - task: TerraformTaskV3@3
             displayName: apply
             inputs:
               provider: 'azurerm'
               command: 'apply'
-              environmentServiceNameAzureRM: 'Pay-As-You-Go(a6f24a81-7804-44a9-b074-25a9781afd24)'
+              environmentServiceNameAzureRM: 'terraform'
