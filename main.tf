@@ -1,5 +1,5 @@
 
-#### Azure Logs Analytics deployment #####
+#### Azure Logs Analytics deployment ####
 
 
 resource "azurerm_resource_group" "rg" {
